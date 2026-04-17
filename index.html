@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Informasi Gender & Anti Pelecehan</title>
+    <title>Kawan Cerita</title>
     <style>
         /* =========================================
            1. RESET & BASE STYLES
@@ -20,6 +20,7 @@
             color: #333;
             background-color: #f4f4f4;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         a { text-decoration: none; color: inherit; }
@@ -116,7 +117,7 @@
            8. JURNAL & STICKY NOTE SECTION
         ========================================= */
         .journal-section {
-            background-color: #2c3e50; /* Warna background diganti agar sticky note lebih menonjol */
+            background-color: #2c3e50;
             padding: 80px 20px;
             display: flex;
             flex-direction: column;
@@ -125,7 +126,7 @@
         }
 
         .journal-title { color: #fff; margin-bottom: 20px; text-align: center; font-size: 2.5rem; }
-        .journal-title span { color: #f1c40f; } /* Warna kuning */
+        .journal-title span { color: #f1c40f; }
 
         /* Kertas Input Utama */
         .input-scene { perspective: 1200px; text-align: center; margin-bottom: 50px; }
@@ -152,30 +153,14 @@
 
         /* Papan Sticky Note (Output) */
         .notes-board {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            width: 100%;
-            max-width: 1100px;
-            padding: 20px;
-            border-top: 2px dashed rgba(255,255,255,0.2);
-            padding-top: 40px;
+            display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; width: 100%;
+            max-width: 1100px; padding: 20px; border-top: 2px dashed rgba(255,255,255,0.2); padding-top: 40px;
         }
 
         .sticky-note {
-            width: 220px;
-            min-height: 220px;
-            padding: 25px 20px 15px 20px;
-            box-shadow: 3px 5px 15px rgba(0,0,0,0.3);
-            position: relative;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 15px;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            word-wrap: break-word;
-            transition: transform 0.2s, z-index 0s;
+            width: 220px; min-height: 220px; padding: 25px 20px 15px 20px; box-shadow: 3px 5px 15px rgba(0,0,0,0.3);
+            position: relative; font-family: 'Courier New', Courier, monospace; font-size: 15px; color: #333;
+            display: flex; flex-direction: column; word-wrap: break-word; transition: transform 0.2s, z-index 0s;
             animation: popIn 0.4s ease-out;
         }
 
@@ -184,11 +169,7 @@
             to { transform: scale(1); opacity: 1; }
         }
 
-        .sticky-note:hover {
-            transform: scale(1.05) !important;
-            z-index: 10;
-            box-shadow: 5px 8px 20px rgba(0,0,0,0.4);
-        }
+        .sticky-note:hover { transform: scale(1.05) !important; z-index: 10; box-shadow: 5px 8px 20px rgba(0,0,0,0.4); }
 
         /* Desain Pin di atas Sticky Note */
         .sticky-note::before {
@@ -205,7 +186,48 @@
         .delete-btn:hover { color: #c0392b; }
 
         /* =========================================
-           9. FOOTER & RESPONSIVE
+           9. CHATBOT WIDGET STYLES
+        ========================================= */
+        .chatbot-toggler { position: fixed; bottom: 30px; right: 35px; outline: none; border: none; height: 60px; width: 60px; background: #3498db; color: #fff; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: all 0.2s ease; z-index: 9999; }
+        .chatbot-toggler:hover { transform: scale(1.1); background: #2980b9; }
+        
+        .chatbot { position: fixed; right: 35px; bottom: 100px; width: 380px; background: #fff; border-radius: 15px; overflow: hidden; opacity: 0; pointer-events: none; transform: scale(0.5); transform-origin: bottom right; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55); z-index: 9999; display: flex; flex-direction: column; }
+        body.show-chatbot .chatbot { opacity: 1; pointer-events: auto; transform: scale(1); }
+        
+        .chatbot header { padding: 16px 20px; position: relative; text-align: left; color: #fff; background: #2c3e50; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px; }
+        .chatbot header .bot-avatar { width: 35px; height: 35px; background: #f1c40f; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .chatbot header h2 { font-size: 1.1rem; letter-spacing: 0.5px; }
+        .chatbot header p { font-size: 0.8rem; opacity: 0.8; margin-top: -3px; }
+        .chatbot header .close-btn { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; transition: 0.2s; }
+        .chatbot header .close-btn:hover { color: #f1c40f; }
+        
+        .chatbot .chatbox { overflow-y: auto; height: 380px; padding: 20px 20px 70px; display: flex; flex-direction: column; gap: 15px; background: #f9f9f9; scroll-behavior: smooth; }
+        .chatbot .chat { display: flex; list-style: none; align-items: flex-end; }
+        .chatbot .chat p { word-wrap: break-word; padding: 12px 16px; font-size: 0.95rem; line-height: 1.5; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        
+        .chatbot .outgoing { justify-content: flex-end; margin-left: 20px; }
+        .chatbot .outgoing p { background: #3498db; color: #fff; border-radius: 18px 18px 0 18px; }
+        
+        .chatbot .incoming { justify-content: flex-start; margin-right: 20px; }
+        .chatbot .incoming p { background: #fff; color: #333; border-radius: 18px 18px 18px 0; border: 1px solid #eaeaea; }
+        
+        .chatbot .chat p a { color: #2980b9; font-weight: bold; text-decoration: underline; background: #e8f6ff; padding: 5px 10px; border-radius: 5px; display: inline-block; margin-top: 8px; transition: 0.3s; }
+        .chatbot .chat p a:hover { background: #3498db; color: #fff; }
+
+        .quick-replies { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .quick-btn { background: #fff; border: 1px solid #3498db; color: #3498db; padding: 8px 15px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
+        .quick-btn:hover { background: #3498db; color: #fff; }
+
+        .chatbot .chat-input { display: flex; gap: 10px; position: absolute; bottom: 0; width: 100%; background: #fff; padding: 15px 20px; border-top: 1px solid #eaeaea; align-items: center; }
+        .chat-input textarea { height: 45px; width: 100%; border: none; outline: none; resize: none; font-size: 0.95rem; padding: 12px 15px; background: #f4f4f4; border-radius: 20px; }
+        .chat-input span { color: #fff; background: #3498db; height: 40px; width: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: 0.2s; }
+        .chat-input span:hover { background: #2980b9; transform: scale(1.05); }
+
+        .chatbox::-webkit-scrollbar { width: 6px; }
+        .chatbox::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+
+        /* =========================================
+           10. FOOTER & RESPONSIVE
         ========================================= */
         footer { background: #1a252f; color: #fff; text-align: center; padding: 20px; }
 
@@ -214,6 +236,9 @@
             .team-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
             .team-section, .about-section, .events-section { min-height: auto; padding: 60px 20px; }
             #paper { width: 100%; }
+            .chatbot { right: 0; bottom: 0; width: 100%; height: 100%; border-radius: 0; }
+            .chatbot .chatbox { height: calc(100vh - 140px); }
+            .chatbot-toggler { bottom: 20px; right: 20px; }
         }
         @media (max-width: 480px) { .team-grid { grid-template-columns: 1fr; } }
     </style>
@@ -222,7 +247,7 @@
 
     <header>
         <div class="container">
-            <div class="logo">SIGAP.ID</div>
+            <div class="logo">Kawan Cerita</div>
             <ul class="nav-links">
                 <li><a href="#home">Beranda</a></li>
                 <li><a href="#team">Tim Kami</a></li>
@@ -244,9 +269,9 @@
         <div class="team-grid">
             <div class="team-member"><img src="smol gura.jpg" alt="Foto Ketua"><h4>Calvin Madclin</h4><p>NIM 1801624047</p></div>
             <div class="team-member"><img src="kovalski.jpg" alt="Foto Sekretaris"><h4>Mahara Damar</h4><p>NIM 1801624271</p></div>
-            <div class="team-member"><img src="mumei.jpeg" alt="Foto Humas"><h4>Afrin Khalisa</h4><p>NIM 1801624271</p></div>
-            <div class="team-member"><img src="smol ame.jpg" alt="Foto Bendahara"><h4>Raisha Amalia</h4><p>NIM 1801624271</p></div>
-            <div class="team-member"><img src="yae.jpg" alt="Foto Kreatif"><h4>Syafira Putri</h4><p>NIM 1801624271</p></div>
+            <div class="team-member"><img src="mumei.jpeg" alt="Foto Humas"><h4>Afrin Khalisa</h4><p>NIM 1801624002</p></div>
+            <div class="team-member"><img src="smol ame.jpg" alt="Foto Bendahara"><h4>Raisha Amalia</h4><p>NIM 1801624013</p></div>
+            <div class="team-member"><img src="yae.jpg" alt="Foto Kreatif"><h4>Syafira Putri</h4><p>NIM 1801624039</p></div>
         </div>
     </section>
 
@@ -294,28 +319,53 @@
             </div>
         </div>
 
-        <div id="notes-board" class="notes-board">
-            </div>
+        <div id="notes-board" class="notes-board"></div>
     </section>
 
     <footer>
         <p>&copy; 2026 Komunitas Kita. Dibuat dengan semangat.</p>
     </footer>
 
+    <button class="chatbot-toggler">💬</button>
+    <div class="chatbot">
+        <header>
+            <div class="bot-avatar">🤝</div>
+            <div>
+                <h2>Kawan Cerita</h2>
+                <p>Selalu siap mendengarkan</p>
+            </div>
+            <span class="close-btn">✖</span>
+        </header>
+        <ul class="chatbox" id="chatbox">
+            <li class="chat incoming">
+                <p>
+                    Halo! 👋 Aku pendamping virtualmu di Kawan Cerita.<br><br>
+                    Ruang ini 100% aman. Apakah ada yang mengganggu pikiranmu, atau kamu butuh informasi untuk lapor kejadian?
+                    <span class="quick-replies" id="initial-options">
+                        <button class="quick-btn" onclick="quickReply('Aku mau curhat')">Aku mau curhat</button>
+                        <button class="quick-btn" onclick="quickReply('Ada kasus tawuran/bullying')">Lapor Kasus Tawuran/Bullying</button>
+                        <button class="quick-btn" onclick="quickReply('Hubungi Admin')">Hubungi Admin / Telegram</button>
+                    </span>
+                </p>
+            </li>
+        </ul>
+        <div class="chat-input">
+            <textarea id="chat-textarea" placeholder="Ketik pesan..." required></textarea>
+            <span id="send-btn">➤</span>
+        </div>
+    </div>
+
     <script>
-        // Pilihan warna pastel untuk sticky notes dan warna pin-nya
+        // ==========================================
+        // 1. LOGIKA STICKY NOTES
+        // ==========================================
         const noteStyles = [
-            { bg: '#fdfd96', pin: '#e74c3c' }, // Kuning - pin merah
-            { bg: '#ffb7b2', pin: '#3498db' }, // Pink - pin biru
-            { bg: '#c1e1c1', pin: '#f39c12' }, // Hijau - pin orange
-            { bg: '#b5ead7', pin: '#8e44ad' }, // Mint - pin ungu
-            { bg: '#c7ceea', pin: '#d35400' }  // Ungu muda - pin merah tua
+            { bg: '#fdfd96', pin: '#e74c3c' }, { bg: '#ffb7b2', pin: '#3498db' },
+            { bg: '#c1e1c1', pin: '#f39c12' }, { bg: '#b5ead7', pin: '#8e44ad' },
+            { bg: '#c7ceea', pin: '#d35400' }
         ];
 
-        // Saat halaman dimuat, panggil catatan yang sudah tersimpan
-        window.onload = () => {
-            loadNotes();
-        };
+        window.onload = () => loadNotes();
 
         function saveNote() {
             const textarea = document.getElementById('entry');
@@ -326,11 +376,9 @@
                 return;
             }
 
-            // Memilih gaya dan rotasi acak agar terlihat natural
             const randomStyle = noteStyles[Math.floor(Math.random() * noteStyles.length)];
-            const randomRotation = Math.floor(Math.random() * 10) - 5; // Rotasi antara -5 sampai 5 derajat
+            const randomRotation = Math.floor(Math.random() * 10) - 5; 
 
-            // Buat objek catatan
             const newNote = {
                 id: Date.now(),
                 text: text,
@@ -339,15 +387,11 @@
                 rotation: randomRotation
             };
 
-            // Ambil data lama dari LocalStorage, tambahkan yang baru, simpan lagi
             let savedNotes = JSON.parse(localStorage.getItem('sigap_notes')) || [];
             savedNotes.push(newNote);
             localStorage.setItem('sigap_notes', JSON.stringify(savedNotes));
 
-            // Tampilkan di layar
             renderNote(newNote);
-
-            // Bersihkan kertas input
             textarea.value = "";
         }
 
@@ -358,33 +402,25 @@
 
         function renderNote(note) {
             const board = document.getElementById('notes-board');
-            
-            // Buat div pembungkus sticky note
             const noteDiv = document.createElement('div');
             noteDiv.className = 'sticky-note';
             noteDiv.id = `note-${note.id}`;
             noteDiv.style.backgroundColor = note.bgColor;
             noteDiv.style.transform = `rotate(${note.rotation}deg)`;
             
-            // Set warna pin menggunakan CSS variable inline
-            noteDiv.style.setProperty('--pin-color', note.pinColor);
-            // Tambahkan CSS khusus untuk pin elemen ini
             const style = document.createElement('style');
             style.innerHTML = `#note-${note.id}::before { background-color: ${note.pinColor}; }`;
             noteDiv.appendChild(style);
 
-            // Buat elemen teks
             const textDiv = document.createElement('div');
             textDiv.innerText = note.text;
             textDiv.style.flexGrow = '1';
 
-            // Buat tombol hapus
             const delBtn = document.createElement('button');
             delBtn.className = 'delete-btn';
             delBtn.innerText = '🗑️ Cabut Pin';
             delBtn.onclick = () => deleteNote(note.id);
 
-            // Masukkan ke dalam DOM
             noteDiv.appendChild(textDiv);
             noteDiv.appendChild(delBtn);
             board.appendChild(noteDiv);
@@ -392,12 +428,10 @@
 
         function deleteNote(id) {
             if(confirm("Yakin ingin mencabut dan menghapus catatan ini?")) {
-                // Hapus dari LocalStorage
                 let savedNotes = JSON.parse(localStorage.getItem('sigap_notes')) || [];
                 savedNotes = savedNotes.filter(n => n.id !== id);
                 localStorage.setItem('sigap_notes', JSON.stringify(savedNotes));
 
-                // Animasi hapus (mengecil lalu hilang)
                 const noteEl = document.getElementById(`note-${id}`);
                 noteEl.style.transform = 'scale(0)';
                 noteEl.style.opacity = '0';
@@ -407,6 +441,80 @@
                 }, 300);
             }
         }
+
+        // ==========================================
+        // 2. LOGIKA CHATBOT INTERAKTIF
+        // ==========================================
+        const chatbotToggler = document.querySelector(".chatbot-toggler");
+        const closeBtn = document.querySelector(".close-btn");
+        const chatbox = document.querySelector(".chatbox");
+        const chatInput = document.querySelector("#chat-textarea");
+        const sendChatBtn = document.querySelector("#send-btn");
+
+        const createChatLi = (message, className) => {
+            const chatLi = document.createElement("li");
+            chatLi.classList.add("chat", className);
+            
+            // Format HTML untuk bot (incoming), Format Text aman untuk user (outgoing)
+            if(className === "outgoing") {
+                chatLi.innerHTML = `<p></p>`;
+                chatLi.querySelector("p").textContent = message; 
+            } else {
+                chatLi.innerHTML = `<p>${message}</p>`;
+            }
+            return chatLi;
+        }
+
+        const quickReply = (text) => {
+            const optionsDiv = document.getElementById('initial-options');
+            if(optionsDiv) optionsDiv.style.display = 'none';
+            chatInput.value = text;
+            handleChat();
+        }
+
+        const generateResponse = (userMessage) => {
+            const msg = userMessage.toLowerCase();
+            let response = "Terima kasih sudah berbagi. Kami menghargai setiap cerita yang masuk. Apakah ada hal spesifik yang ingin kamu diskusikan dengan admin?";
+
+            if (msg.includes("halo") || msg.includes("hai") || msg.includes("curhat")) {
+                response = "Tarik napas perlahan... Kamu aman di sini. Silakan ceritakan apa yang mengganjal di pikiranmu, aku siap mendengarkan tanpa menghakimi.";
+            } else if (msg.includes("tawuran") || msg.includes("bullying") || msg.includes("dibully") || msg.includes("kasar") || msg.includes("lapor")) {
+                response = `Kami sangat menolak segala bentuk kekerasan. Ini bukan salahmu dan kamu tidak sendirian menghadapi ini.<br><br>Untuk tindakan pencegahan atau pelaporan yang lebih aman, sangat disarankan untuk berbicara langsung dengan tim pendamping kami.<br>
+                <a href="https://t.me/GantiDenganLinkTelegramGrupAtauAkun" target="_blank">Lapor via Telegram Admin ➔</a>`;
+            } else if (msg.includes("admin") || msg.includes("telegram") || msg.includes("kontak") || msg.includes("bantuan")) {
+                response = `Tentu, kamu bisa bergabung dengan grup diskusi kami atau mengobrol secara privat (*confidential*) dengan konselor Kawan Cerita melalui Telegram di bawah ini:<br><br>
+                <a href="https://t.me/GantiDenganLinkTelegramGrupAtauAkun" target="_blank">💬 Hubungi via Telegram</a><br><br>Pesanmu akan direspons secepat mungkin.`;
+            } else if (msg.includes("sedih") || msg.includes("takut") || msg.includes("depresi") || msg.includes("capek")) {
+                response = "Wajar banget untuk merasa lelah dan takut dengan keadaan sekitar. Tidak apa-apa mengambil waktu sejenak untuk dirimu sendiri. Mau kutemani ngobrol, atau kamu ingin dialihkan ke tim konselor di Telegram?";
+            }
+
+            setTimeout(() => {
+                chatbox.appendChild(createChatLi(response, "incoming"));
+                chatbox.scrollTo(0, chatbox.scrollHeight);
+            }, 800); 
+        }
+
+        const handleChat = () => {
+            const userMessage = chatInput.value.trim();
+            if(!userMessage) return;
+
+            chatInput.value = "";
+            chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+            
+            generateResponse(userMessage);
+        }
+
+        sendChatBtn.addEventListener("click", handleChat);
+        chatInput.addEventListener("keydown", (e) => {
+            if(e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleChat();
+            }
+        });
+
+        chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+        closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
     </script>
 </body>
 </html>
