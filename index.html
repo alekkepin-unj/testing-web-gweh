@@ -8,21 +8,8 @@
         /* =========================================
            1. RESET & BASE STYLES
         ========================================= */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f4;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { line-height: 1.6; color: #333; background-color: #f4f4f4; overflow-x: hidden; scroll-behavior: smooth; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
@@ -117,23 +104,18 @@
         .delete-btn:hover { color: #c0392b; }
 
         /* =========================================
-           9. CHATBOT WIDGET STYLES
+           9. CHATBOT WIDGET STYLES (DRAGGABLE)
         ========================================= */
         .chatbot-toggler { position: fixed; bottom: 30px; right: 35px; outline: none; border: none; height: 60px; width: 60px; background: #3498db; color: #fff; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: all 0.2s ease; z-index: 9999; }
         .chatbot-toggler:hover { transform: scale(1.1); background: #2980b9; }
         
-        .chatbot { position: fixed; right: 35px; bottom: 100px; width: 380px; background: #fff; border-radius: 15px; overflow: hidden; opacity: 0; pointer-events: none; transform: scale(0.5); transform-origin: bottom right; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: opacity 0.2s, transform 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55); z-index: 9999; display: flex; flex-direction: column; }
+        .chatbot { position: fixed; right: 35px; bottom: 100px; width: 380px; background: #fff; border-radius: 15px; overflow: hidden; opacity: 0; pointer-events: none; transform: scale(0.5); transform-origin: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: opacity 0.2s, transform 0.2s; z-index: 9999; display: flex; flex-direction: column; }
         body.show-chatbot .chatbot { opacity: 1; pointer-events: auto; transform: scale(1); }
         
-        /* HEADER DRAGGABLE STYLES */
-        .chatbot header { padding: 16px 20px; position: relative; text-align: left; color: #fff; background: #2c3e50; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px; 
-            /* Tambahan untuk efek geser */
-            cursor: grab; 
-            user-select: none;
-            touch-action: none;
-        }
+        /* Tambahan kursor grab untuk menandakan bisa di-drag */
+        .chatbot header { padding: 16px 20px; position: relative; text-align: left; color: #fff; background: #2c3e50; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px; cursor: grab; user-select: none; }
         .chatbot header:active { cursor: grabbing; }
-
+        
         .chatbot header .bot-avatar { width: 35px; height: 35px; background: #f1c40f; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
         .chatbot header h2 { font-size: 1.1rem; letter-spacing: 0.5px; }
         .chatbot header p { font-size: 0.8rem; opacity: 0.8; margin-top: -3px; }
@@ -146,11 +128,9 @@
         
         .chatbot .outgoing { justify-content: flex-end; margin-left: 20px; }
         .chatbot .outgoing p { background: #3498db; color: #fff; border-radius: 18px 18px 0 18px; }
-        
         .chatbot .incoming { justify-content: flex-start; margin-right: 20px; }
         .chatbot .incoming p { background: #fff; color: #333; border-radius: 18px 18px 18px 0; border: 1px solid #eaeaea; }
-        
-        .chatbot .chat p a { color: #2980b9; font-weight: bold; text-decoration: underline; background: #e8f6ff; padding: 5px 10px; border-radius: 5px; display: inline-block; margin-top: 8px; transition: 0.3s; }
+        .chatbot .chat p a { color: #2980b9; font-weight: bold; text-decoration: underline; background: #e8f6ff; padding: 5px 10px; border-radius: 5px; display: inline-block; margin-top: 8px; transition: 0.3s; pointer-events: auto; }
         .chatbot .chat p a:hover { background: #3498db; color: #fff; }
 
         .quick-replies { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
@@ -175,9 +155,12 @@
             .team-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
             .team-section, .about-section, .events-section { min-height: auto; padding: 60px 20px; }
             #paper { width: 100%; }
-            .chatbot { right: 0; bottom: 0; width: 100%; height: 100%; border-radius: 0; }
+            /* Di layar HP, matikan fungsi drag dengan menjadikannya layar penuh */
+            .chatbot { right: 0 !important; top: auto !important; left: auto !important; bottom: 0 !important; width: 100%; height: 100%; border-radius: 0; transform: translateY(100%); transition: transform 0.3s; }
+            body.show-chatbot .chatbot { transform: translateY(0) scale(1); }
             .chatbot .chatbox { height: calc(100vh - 140px); }
             .chatbot-toggler { bottom: 20px; right: 20px; }
+            .chatbot header { cursor: default; } /* Matikan kursor drag di HP */
         }
         @media (max-width: 480px) { .team-grid { grid-template-columns: 1fr; } }
     </style>
@@ -248,6 +231,7 @@
 
     <section id="join" class="journal-section">
         <h2 class="journal-title">Papan <span>Keresahan</span></h2>
+        
         <div class="input-scene">
             <div id="paper">
                 <textarea id="entry" placeholder="Tuliskan catatan, ide, atau keresahanmu di sini..."></textarea>
@@ -256,6 +240,7 @@
                 <button onclick="saveNote()">Pin Catatan 📌</button>
             </div>
         </div>
+
         <div id="notes-board" class="notes-board"></div>
     </section>
 
@@ -307,19 +292,11 @@
         function saveNote() {
             const textarea = document.getElementById('entry');
             const text = textarea.value.trim();
-
-            if (text === "") {
-                alert("Kertas masih kosong, tulis sesuatu dulu!");
-                return;
-            }
+            if (text === "") { alert("Kertas masih kosong, tulis sesuatu dulu!"); return; }
 
             const randomStyle = noteStyles[Math.floor(Math.random() * noteStyles.length)];
             const randomRotation = Math.floor(Math.random() * 10) - 5; 
-
-            const newNote = {
-                id: Date.now(), text: text, bgColor: randomStyle.bg, 
-                pinColor: randomStyle.pin, rotation: randomRotation
-            };
+            const newNote = { id: Date.now(), text: text, bgColor: randomStyle.bg, pinColor: randomStyle.pin, rotation: randomRotation };
 
             let savedNotes = JSON.parse(localStorage.getItem('sigap_notes')) || [];
             savedNotes.push(newNote);
@@ -369,13 +346,12 @@
                 const noteEl = document.getElementById(`note-${id}`);
                 noteEl.style.transform = 'scale(0)';
                 noteEl.style.opacity = '0';
-                
-                setTimeout(() => noteEl.remove(), 300);
+                setTimeout(() => { noteEl.remove(); }, 300);
             }
         }
 
         // ==========================================
-        // 2. LOGIKA CHATBOT & BALASAN
+        // 2. LOGIKA CHATBOT INTERAKTIF
         // ==========================================
         const chatbotToggler = document.querySelector(".chatbot-toggler");
         const closeBtn = document.querySelector(".close-btn");
@@ -413,7 +389,7 @@
                 response = `Kami sangat menolak segala bentuk kekerasan. Ini bukan salahmu dan kamu tidak sendirian menghadapi ini.<br><br>Untuk tindakan pencegahan atau pelaporan yang lebih aman, sangat disarankan untuk berbicara langsung dengan tim pendamping kami.<br>
                 <a href="https://t.me/GantiDenganLinkTelegramGrupAtauAkun" target="_blank">Lapor via Telegram Admin ➔</a>`;
             } else if (msg.includes("admin") || msg.includes("telegram") || msg.includes("kontak") || msg.includes("bantuan")) {
-                response = `Tentu, kamu bisa bergabung dengan grup diskusi kami atau mengobrol secara privat dengan konselor Kawan Cerita melalui Telegram di bawah ini:<br><br>
+                response = `Tentu, kamu bisa bergabung dengan grup diskusi kami atau mengobrol secara privat (*confidential*) dengan konselor Kawan Cerita melalui Telegram di bawah ini:<br><br>
                 <a href="https://t.me/GantiDenganLinkTelegramGrupAtauAkun" target="_blank">💬 Hubungi via Telegram</a><br><br>Pesanmu akan direspons secepat mungkin.`;
             } else if (msg.includes("sedih") || msg.includes("takut") || msg.includes("depresi") || msg.includes("capek")) {
                 response = "Wajar banget untuk merasa lelah dan takut dengan keadaan sekitar. Tidak apa-apa mengambil waktu sejenak untuk dirimu sendiri. Mau kutemani ngobrol, atau kamu ingin dialihkan ke tim konselor di Telegram?";
@@ -445,95 +421,65 @@
         });
 
         chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
-        closeBtn.addEventListener("click", () => {
-            document.body.classList.remove("show-chatbot");
-            // Reset posisi saat ditutup agar rapi saat dibuka kembali
-            const chatbotWindow = document.getElementById("chatbot-window");
-            chatbotWindow.style.left = "";
-            chatbotWindow.style.top = "";
-            chatbotWindow.style.bottom = "100px";
-            chatbotWindow.style.right = "35px";
-        });
+        closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
 
         // ==========================================
-        // 3. LOGIKA DRAGGABLE (GESER) CHATBOT
+        // 3. LOGIKA DRAG & DROP UNTUK CHATBOT (BARU)
         // ==========================================
         const chatbotWindow = document.getElementById("chatbot-window");
         const chatbotHeader = document.getElementById("chatbot-header");
 
         let isDragging = false;
-        let initialX, initialY, startX, startY;
+        let offsetX, offsetY;
 
-        // Fungsi mulai drag (Mouse & Touch)
-        const startDrag = (e) => {
-            // Nonaktifkan fitur drag di HP (layar kecil) agar tidak bentrok dengan fullscreen chat
-            if (window.innerWidth <= 768) return; 
-
-            // Cek apakah yang diklik adalah tombol close (silang), kalau iya jangan di-drag
+        // Fungsi saat mouse ditekan di header
+        chatbotHeader.addEventListener("mousedown", (e) => {
+            // Jangan jalankan drag jika yang diklik adalah tombol close (X)
             if (e.target.classList.contains("close-btn")) return;
+            // Jika layar di bawah 768px (HP), fitur drag dimatikan karena layar penuh
+            if (window.innerWidth <= 768) return;
 
             isDragging = true;
-            chatbotWindow.style.transition = "none"; // Matikan transisi agar geser tidak lag
-
+            
+            // Dapatkan posisi absolut elemen saat ini di layar
             const rect = chatbotWindow.getBoundingClientRect();
-            initialX = rect.left;
-            initialY = rect.top;
-
-            startX = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
-            startY = e.type.includes("mouse") ? e.clientY : e.touches[0].clientY;
-
-            // Pindahkan perhitungan dari right/bottom ke left/top untuk memudahkan geser
+            
+            // Ubah pengaturan posisi dari "right/bottom" menjadi "left/top" agar bisa digerakkan bebas
+            chatbotWindow.style.left = rect.left + "px";
+            chatbotWindow.style.top = rect.top + "px";
             chatbotWindow.style.right = "auto";
             chatbotWindow.style.bottom = "auto";
-            chatbotWindow.style.left = initialX + "px";
-            chatbotWindow.style.top = initialY + "px";
-        };
+            chatbotWindow.style.margin = "0";
 
-        // Fungsi proses drag
-        const doDrag = (e) => {
+            // Hitung jarak antara titik klik mouse dengan ujung kiri/atas chatbot
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
+        });
+
+        // Fungsi saat mouse digeser
+        document.addEventListener("mousemove", (e) => {
             if (!isDragging) return;
-            e.preventDefault(); // Mencegah teks ter-highlight saat digeser
 
-            const currentX = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
-            const currentY = e.type.includes("mouse") ? e.clientY : e.touches[0].clientY;
+            // Hitung koordinat baru
+            let newX = e.clientX - offsetX;
+            let newY = e.clientY - offsetY;
 
-            const dx = currentX - startX;
-            const dy = currentY - startY;
+            // Batasi pergerakan agar tidak keluar dari layar browser
+            const maxX = window.innerWidth - chatbotWindow.offsetWidth;
+            const maxY = window.innerHeight - chatbotWindow.offsetHeight;
 
-            let newX = initialX + dx;
-            let newY = initialY + dy;
+            newX = Math.max(0, Math.min(newX, maxX));
+            newY = Math.max(0, Math.min(newY, maxY));
 
-            // Batas layar agar chatbot tidak hilang keluar frame
-            const maxRight = window.innerWidth - chatbotWindow.offsetWidth;
-            const maxBottom = window.innerHeight - chatbotWindow.offsetHeight;
+            // Terapkan posisi baru
+            chatbotWindow.style.left = `${newX}px`;
+            chatbotWindow.style.top = `${newY}px`;
+        });
 
-            if (newX < 0) newX = 0;
-            if (newY < 0) newY = 0;
-            if (newX > maxRight) newX = maxRight;
-            if (newY > maxBottom) newY = maxBottom;
-
-            chatbotWindow.style.left = newX + "px";
-            chatbotWindow.style.top = newY + "px";
-        };
-
-        // Fungsi berhenti drag
-        const stopDrag = () => {
-            if (isDragging) {
-                isDragging = false;
-                // Kembalikan transisi hanya untuk opasitas, agar tidak glitch posisi
-                chatbotWindow.style.transition = "opacity 0.2s, transform 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55)"; 
-            }
-        };
-
-        // Event listener untuk Desktop (Mouse)
-        chatbotHeader.addEventListener("mousedown", startDrag);
-        document.addEventListener("mousemove", doDrag);
-        document.addEventListener("mouseup", stopDrag);
-
-        // Event listener untuk Touch (Tablet)
-        chatbotHeader.addEventListener("touchstart", startDrag, { passive: false });
-        document.addEventListener("touchmove", doDrag, { passive: false });
-        document.addEventListener("touchend", stopDrag);
+        // Fungsi saat mouse dilepas
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+        });
 
     </script>
 </body>
