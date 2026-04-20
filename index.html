@@ -129,8 +129,10 @@
         .chatbot .outgoing p { background: #3498db; color: #fff; border-radius: 18px 18px 0 18px; }
         .chatbot .incoming { justify-content: flex-start; margin-right: 20px; }
         .chatbot .incoming p { background: #fff; color: #333; border-radius: 18px 18px 18px 0; border: 1px solid #eaeaea; }
-        .chatbot .chat p a { color: #2980b9; font-weight: bold; text-decoration: underline; background: #e8f6ff; padding: 5px 10px; border-radius: 5px; display: inline-block; margin-top: 8px; transition: 0.3s; pointer-events: auto; }
-        .chatbot .chat p a:hover { background: #3498db; color: #fff; }
+        
+        /* Desain Link Telegram dalam Obrolan Bot */
+        .chatbot .chat p a { color: #fff; font-weight: bold; text-decoration: none; background: #2980b9; padding: 8px 12px; border-radius: 8px; display: inline-block; margin-top: 10px; transition: 0.3s; pointer-events: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid #2471a3; }
+        .chatbot .chat p a:hover { background: #1a5276; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
 
         .quick-replies { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
         .quick-btn { background: #fff; border: 1px solid #3498db; color: #3498db; padding: 8px 15px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
@@ -353,7 +355,7 @@
         }
 
         // ==========================================
-        // 2. LOGIKA CHATBOT INTERAKTIF (DENGAN LINK TELEGRAM BOT)
+        // 2. LOGIKA CHATBOT INTERAKTIF
         // ==========================================
         const chatbotToggler = document.querySelector(".chatbot-toggler");
         const closeBtn = document.querySelector(".close-btn");
@@ -381,6 +383,7 @@
             handleChat();
         }
 
+        // PENGATURAN BALASAN BOT & LINK TELEGRAM
         const generateResponse = (userMessage) => {
             const msg = userMessage.toLowerCase();
             let response = "Terima kasih sudah berbagi. Kami menghargai setiap cerita yang masuk. Apakah ada hal spesifik yang ingin kamu diskusikan dengan admin?";
@@ -388,13 +391,14 @@
             if (msg.includes("halo") || msg.includes("hai") || msg.includes("curhat")) {
                 response = "Tarik napas perlahan... Kamu aman di sini. Silakan ceritakan apa yang mengganjal di pikiranmu, aku siap mendengarkan tanpa menghakimi.";
             } else if (msg.includes("tawuran") || msg.includes("bullying") || msg.includes("dibully") || msg.includes("kasar") || msg.includes("lapor")) {
-                response = `Kami sangat menolak segala bentuk kekerasan. Ini bukan salahmu dan kamu tidak sendirian menghadapi ini.<br><br>Untuk tindakan pencegahan atau pelaporan yang lebih aman, sangat disarankan untuk berbicara langsung dengan tim pendamping kami.<br>
-                <a href="https://t.me/pendengarceritakamu_bot" target="_blank">Lapor via Telegram Admin ➔</a>`;
+                response = `Kami sangat menolak segala bentuk kekerasan. Ini bukan salahmu dan kamu tidak sendirian menghadapi ini.<br><br>Untuk tindakan pencegahan atau pelaporan yang lebih aman, sangat disarankan untuk berbicara langsung dengan tim pendamping kami.<br><br>
+                <a href="https://t.me/pendengarceritakamu_bot" target="_blank">💬 Lapor via Telegram Admin</a>`;
             } else if (msg.includes("admin") || msg.includes("telegram") || msg.includes("kontak") || msg.includes("bantuan")) {
-                response = `Tentu, kamu bisa mengobrol secara privat (*confidential*) dengan konselor Kawan Cerita melalui Telegram di bawah ini:<br><br>
-                <a href="https://t.me/pendengarceritakamu_bot" target="_blank">💬 Hubungi via Telegram</a><br><br>Pesanmu akan direspons secepat mungkin.`;
+                response = `Tentu, kamu bisa mengobrol secara privat (*confidential*) dengan konselor Kawan Cerita melalui Telegram bot kami di bawah ini:<br><br>
+                <a href="https://t.me/pendengarceritakamu_bot" target="_blank">💬 Hubungi via Telegram</a><br><br>Pesanmu akan direspons secepat mungkin oleh tim kami.`;
             } else if (msg.includes("sedih") || msg.includes("takut") || msg.includes("depresi") || msg.includes("capek")) {
-                response = "Wajar banget untuk merasa lelah dan takut dengan keadaan sekitar. Tidak apa-apa mengambil waktu sejenak untuk dirimu sendiri. Mau kutemani ngobrol, atau kamu ingin dialihkan ke tim konselor di Telegram?";
+                response = `Wajar banget untuk merasa lelah dan takut dengan keadaan sekitar. Tidak apa-apa mengambil waktu sejenak untuk dirimu sendiri. Jika butuh ruang yang lebih aman untuk bercerita panjang, kamu bisa menghubungi kami di sini:<br><br>
+                <a href="https://t.me/pendengarceritakamu_bot" target="_blank">💬 Cerita ke Admin</a>`;
             }
 
             setTimeout(() => {
@@ -436,7 +440,7 @@
 
         chatbotHeader.addEventListener("mousedown", (e) => {
             if (e.target.classList.contains("close-btn")) return;
-            if (window.innerWidth <= 600) return; // Nonaktifkan drag di layar HP agar tetap fullscreen
+            if (window.innerWidth <= 600) return;
 
             isDragging = true;
             
