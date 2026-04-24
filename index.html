@@ -64,7 +64,7 @@
         .card h3 { margin-bottom: 10px; color: #2c3e50; }
 
         /* =========================================
-           7. EVENTS / LITERATUR SECTION
+           7. LITERATUR SECTION
         ========================================= */
         .jurnal-lit-section { padding: 80px 20px 60px; background-color: #f4f4f4; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
         .section-title { text-align: center; font-size: 2.5rem; color: #2c3e50; margin-bottom: 10px; }
@@ -80,23 +80,27 @@
         .btn-baca:hover { background-color: #3498db; color: #fff; }
 
         /* =========================================
-           8. PAPAN JURNAL (BUKU DIARY INTERAKTIF)
+           8. PAPAN JURNAL (BUKU DIARY INTERAKTIF A5)
         ========================================= */
         .journal-section { background-color: #1a252f; padding: 80px 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .journal-title { color: #fff; margin-bottom: 40px; text-align: center; font-size: 2.5rem; }
+        .journal-title { color: #fff; margin-bottom: 20px; text-align: center; font-size: 2.5rem; }
         .journal-title span { color: #f1c40f; }
 
-        /* Container Buku Terbuka */
+        /* Tab Mobile untuk Jurnal (Awalnya disembunyikan) */
+        .mobile-tabs { display: none; }
+
+        /* Container Buku Terbuka (Ukuran 2 Halaman A5 Bersebelahan = 1 Halaman A4 Landscape) */
         .book-container {
             display: flex;
             width: 100%;
-            max-width: 950px;
+            max-width: 842px; 
+            min-height: 595px; 
             background-color: #fdfbf7;
             border-radius: 10px;
             box-shadow: 0 25px 50px rgba(0,0,0,0.5), inset 0 0 30px rgba(0,0,0,0.05);
             position: relative;
             overflow: hidden;
-            perspective: 1500px; /* Untuk efek 3D flip */
+            perspective: 1500px;
         }
 
         /* Efek Lipatan Buku di Tengah */
@@ -113,7 +117,7 @@
         /* Halaman Buku */
         .book-page {
             flex: 1;
-            padding: 40px 50px;
+            padding: 40px 50px; 
             position: relative;
             display: flex;
             flex-direction: column;
@@ -130,31 +134,31 @@
         /* Area Mengetik (Halaman Kiri) */
         .left-page textarea {
             flex-grow: 1; width: 100%; border: none; resize: none; background: transparent; outline: none;
-            font-family: 'Courier New', Courier, monospace; font-size: 16px; line-height: 32px; color: #2c3e50; z-index: 2; position: relative; padding-right: 50px;
+            font-family: 'Courier New', Courier, monospace; font-size: 16px; line-height: 32px; color: #2c3e50; z-index: 2; position: relative; padding-right: 40px;
         }
         
         .btn-save-note {
             margin-top: 20px; padding: 12px 20px; background: #2c3e50; color: #fff; border: none; border-radius: 5px;
-            cursor: pointer; font-weight: bold; text-transform: uppercase; z-index: 2; position: relative; transition: 0.3s;
+            cursor: pointer; font-weight: bold; text-transform: uppercase; z-index: 2; position: relative; transition: 0.3s; font-size: 0.95rem;
         }
         .btn-save-note:hover { background: #34495e; transform: translateY(-2px); }
 
         /* Area Membaca (Halaman Kanan) */
         .read-area { flex-grow: 1; z-index: 2; position: relative; padding-left: 20px; display: flex; flex-direction: column; }
-        .note-date { font-size: 0.85rem; color: #7f8c8d; margin-bottom: 10px; font-style: italic; font-family: 'Courier New', Courier, monospace;}
+        .note-date { font-size: 0.9rem; color: #7f8c8d; margin-bottom: 10px; font-style: italic; font-family: 'Courier New', Courier, monospace;}
         .note-content { font-family: 'Courier New', Courier, monospace; font-size: 16px; line-height: 32px; color: #2c3e50; white-space: pre-wrap; flex-grow: 1; }
         
         /* Pesan Kosong */
-        .empty-state { text-align: center; color: #95a5a6; font-style: italic; margin-top: 50px; font-family: 'Courier New', Courier, monospace; }
+        .empty-state { text-align: center; color: #95a5a6; font-style: italic; margin-top: 50px; font-family: 'Courier New', Courier, monospace; font-size: 1rem; }
 
         /* Navigasi Balik Halaman */
         .page-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; z-index: 2; position: relative; padding-left: 10px; }
-        .btn-flip { background: none; border: 2px solid #bdc3c7; color: #7f8c8d; padding: 5px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-weight: bold; }
+        .btn-flip { background: none; border: 2px solid #bdc3c7; color: #7f8c8d; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-weight: bold; font-size: 0.95rem; }
         .btn-flip:hover:not(:disabled) { border-color: #3498db; color: #3498db; }
         .btn-flip:disabled { opacity: 0.3; cursor: not-allowed; }
-        .page-indicator { font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; color: #7f8c8d; }
+        .page-indicator { font-family: 'Courier New', Courier, monospace; font-size: 0.95rem; color: #7f8c8d; }
 
-        .btn-delete { margin-top: 15px; background: none; border: none; color: #e74c3c; cursor: pointer; text-decoration: underline; font-size: 0.9rem; align-self: flex-start; z-index: 2; position: relative; padding-left: 20px; }
+        .btn-delete { margin-top: 15px; background: none; border: none; color: #e74c3c; cursor: pointer; text-decoration: underline; font-size: 0.95rem; align-self: flex-start; z-index: 2; position: relative; padding-left: 20px; }
 
         /* Animasi Membalik Kertas */
         .flip-animation { animation: turnPage 0.5s ease-in-out; }
@@ -165,7 +169,7 @@
         }
 
         /* =========================================
-           9. CHATBOT WIDGET STYLES (DRAGGABLE)
+           9. CHATBOT WIDGET STYLES
         ========================================= */
         .chatbot-toggler { position: fixed; bottom: 30px; right: 35px; outline: none; border: none; height: 60px; width: 60px; background: #3498db; color: #fff; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: all 0.2s ease; z-index: 9999; }
         .chatbot-toggler:hover { transform: scale(1.1); background: #2980b9; }
@@ -215,17 +219,33 @@
             .nav-links { margin-top: 15px; width: 100%; justify-content: center; }
             .team-section, .about-section, .jurnal-lit-section, .journal-section { min-height: auto; padding: 60px 20px; }
             
-            /* Buku diubah menjulur ke bawah di HP */
-            .book-container { flex-direction: column; }
-            .book-spine { top: 50%; bottom: auto; left: 0; right: 0; width: 100%; height: 20px; transform: translateY(-50%); background: linear-gradient(to bottom, rgba(253,251,247,0) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.1) 60%, rgba(253,251,247,0) 100%); }
-            .left-page::before { right: auto; left: 40px; } /* Pindah garis merah ke kiri di HP */
-            .left-page textarea { padding-right: 0; padding-left: 20px; min-height: 200px; }
+            /* Tampilkan Tab Navigasi Khusus HP */
+            .mobile-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; width: 100%; max-width: 842px; margin-left: auto; margin-right: auto; }
+            .tab-btn { padding: 10px 25px; background: #34495e; border: none; border-radius: 20px; font-weight: bold; color: #fff; cursor: pointer; transition: 0.3s; font-size: 0.95rem; }
+            .tab-btn.active { background: #f1c40f; color: #2c3e50; box-shadow: 0 4px 10px rgba(241, 196, 15, 0.4); }
+
+            /* Ubah Buku Menjadi 1 Lembar A5 Terlipat (Single Page) */
+            .book-container { display: block; min-height: 600px; position: relative; } 
+            .book-page { min-height: 600px; padding: 40px 30px; width: 100%; }
+            .right-page { display: none; } /* Sembunyikan halaman baca di awal */
+            
+            /* Posisi Besi Spiral di Kiri */
+            .book-spine { left: 0; transform: none; width: 30px; background: radial-gradient(circle at 0% 50%, transparent 6px, #a8a8a8 7px, #dfdfdf 9px, transparent 10px) 0 10px / 100% 32px, radial-gradient(circle, #2c3e50 5px, transparent 6px) 15px 10px / 100% 32px; z-index: 10; top: 0; bottom: 0; height: 100%; }
+            
+            /* Posisi Garis Merah */
+            .left-page::before { left: 40px; right: auto; } 
+            .right-page::before { left: 40px; right: auto; }
+            
+            .left-page textarea { padding-right: 0; padding-left: 25px; }
+            .read-area { padding-left: 25px; }
+            .btn-delete { padding-left: 25px; }
         }
 
         @media (max-width: 600px) {
             .container { flex-direction: column; text-align: center; }
             .jurnal-lit-grid { grid-template-columns: 1fr; } 
             
+            /* Chatbot Layar Penuh di HP */
             .chatbot { right: 0 !important; top: 0 !important; left: 0 !important; bottom: 0 !important; width: 100%; height: 100vh; border-radius: 0; transform: translateY(100%); transition: transform 0.3s; z-index: 10000; }
             body.show-chatbot .chatbot { transform: translateY(0) scale(1); }
             .chatbot .chatbox { height: calc(100vh - 140px); } 
@@ -321,10 +341,15 @@
     <section id="join" class="journal-section">
         <h2 class="journal-title">Buku <span>Jurnal Keresahan</span></h2>
         
+        <div class="mobile-tabs">
+            <button class="tab-btn active" id="tab-write" onclick="switchMobileTab('write')">Tulis Jurnal</button>
+            <button class="tab-btn" id="tab-read" onclick="switchMobileTab('read')">Riwayat Jurnal</button>
+        </div>
+
         <div class="book-container">
             <div class="book-spine"></div>
             
-            <div class="book-page left-page">
+            <div class="book-page left-page" id="left-page">
                 <h3>Tulis Ceritamu...</h3>
                 <textarea id="entry" placeholder="Ketikan beban pikiran, ide, atau keresahanmu di lembaran kosong ini..."></textarea>
                 <button class="btn-save-note" onclick="saveNote()">Simpan ke Lembar Jurnal</button>
@@ -334,8 +359,7 @@
                 <h3>Riwayat Jurnal</h3>
                 <div class="read-area">
                     <div id="note-date" class="note-date"></div>
-                    <div id="note-content" class="note-content">
-                        </div>
+                    <div id="note-content" class="note-content"></div>
                 </div>
                 <button id="btn-delete" class="btn-delete" onclick="deleteCurrentNote()" style="display: none;">❌ Robek Halaman Ini</button>
                 
@@ -383,19 +407,54 @@
 
     <script>
         // ==========================================
-        // 1. LOGIKA BUKU JURNAL (PAGINATION)
+        // 1. LOGIKA BUKU JURNAL & TAB MOBILE
         // ==========================================
         let savedNotes = [];
-        let currentPage = 0; // Index array catatan
+        let currentPage = 0;
 
-        window.onload = () => {
-            loadNotes();
-        };
+        window.onload = () => { loadNotes(); };
+
+        // Fungsi Switch Tab untuk layar HP
+        function switchMobileTab(tab) {
+            if (window.innerWidth > 850) return; // Jangan jalankan di PC
+            
+            const leftPage = document.getElementById('left-page');
+            const rightPage = document.getElementById('read-page');
+            const tabWrite = document.getElementById('tab-write');
+            const tabRead = document.getElementById('tab-read');
+
+            if (tab === 'write') {
+                leftPage.style.display = 'flex';
+                rightPage.style.display = 'none';
+                tabWrite.classList.add('active');
+                tabRead.classList.remove('active');
+            } else {
+                leftPage.style.display = 'none';
+                rightPage.style.display = 'flex';
+                tabWrite.classList.remove('active');
+                tabRead.classList.add('active');
+            }
+        }
+
+        // Reset display saat layar di-resize kembali ke ukuran PC
+        window.addEventListener('resize', () => {
+            const leftPage = document.getElementById('left-page');
+            const rightPage = document.getElementById('read-page');
+            if (window.innerWidth > 850) {
+                leftPage.style.display = 'flex';
+                rightPage.style.display = 'flex';
+            } else {
+                // Terapkan ulang logika tab berdasarkan tab mana yang sedang aktif
+                const isReadActive = document.getElementById('tab-read').classList.contains('active');
+                if(isReadActive) switchMobileTab('read');
+                else switchMobileTab('write');
+            }
+        });
 
         function loadNotes() {
             savedNotes = JSON.parse(localStorage.getItem('kawan_cerita_notes')) || [];
             if (savedNotes.length > 0) {
-                currentPage = savedNotes.length - 1; // Mulai dari halaman paling baru
+                currentPage = savedNotes.length - 1; 
                 renderPage();
             } else {
                 renderEmptyPage();
@@ -407,26 +466,26 @@
             const text = textarea.value.trim();
             if (text === "") { alert("Kertas masih kosong, tulis sesuatu dulu ya!"); return; }
 
-            // Simpan tanggal saat ini
             const dateStr = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            
             const newNote = { id: Date.now(), text: text, date: dateStr };
 
             savedNotes.push(newNote);
             localStorage.setItem('kawan_cerita_notes', JSON.stringify(savedNotes));
 
             textarea.value = "";
-            currentPage = savedNotes.length - 1; // Langsung buka halaman yang baru ditulis
+            currentPage = savedNotes.length - 1; 
             
-            // Tambahkan animasi membalik kertas di halaman kanan
+            // Jika di HP, langsung pindahkan ke tab Riwayat (Baca) setelah menyimpan
+            if (window.innerWidth <= 850) {
+                switchMobileTab('read');
+            }
+
             const rightPage = document.getElementById('read-page');
             rightPage.classList.remove('flip-animation');
-            void rightPage.offsetWidth; // Trigger reflow
+            void rightPage.offsetWidth; 
             rightPage.classList.add('flip-animation');
 
-            setTimeout(() => {
-                renderPage();
-            }, 250); // Ubah teks saat kertas sedang membalik (pertengahan animasi)
+            setTimeout(() => { renderPage(); }, 250); 
         }
 
         function renderPage() {
@@ -437,10 +496,7 @@
             const btnNext = document.getElementById('btn-next');
             const btnDel = document.getElementById('btn-delete');
 
-            if (savedNotes.length === 0) {
-                renderEmptyPage();
-                return;
-            }
+            if (savedNotes.length === 0) { renderEmptyPage(); return; }
 
             const currentNote = savedNotes[currentPage];
             dateEl.innerText = currentNote.date;
@@ -449,7 +505,6 @@
             indicatorEl.innerText = `Hal ${currentPage + 1} / ${savedNotes.length}`;
             btnDel.style.display = 'block';
 
-            // Atur tombol Prev/Next
             btnPrev.disabled = (currentPage === 0);
             btnNext.disabled = (currentPage === savedNotes.length - 1);
         }
@@ -466,20 +521,14 @@
         function prevPage() {
             if (currentPage > 0) {
                 triggerFlipAnimation();
-                setTimeout(() => {
-                    currentPage--;
-                    renderPage();
-                }, 250);
+                setTimeout(() => { currentPage--; renderPage(); }, 250);
             }
         }
 
         function nextPage() {
             if (currentPage < savedNotes.length - 1) {
                 triggerFlipAnimation();
-                setTimeout(() => {
-                    currentPage++;
-                    renderPage();
-                }, 250);
+                setTimeout(() => { currentPage++; renderPage(); }, 250);
             }
         }
 
@@ -492,14 +541,12 @@
 
         function deleteCurrentNote() {
             if(confirm("Yakin ingin merobek (menghapus) halaman ini?")) {
-                savedNotes.splice(currentPage, 1); // Hapus 1 elemen di posisi currentPage
+                savedNotes.splice(currentPage, 1); 
                 localStorage.setItem('kawan_cerita_notes', JSON.stringify(savedNotes));
                 
                 triggerFlipAnimation();
                 setTimeout(() => {
-                    if (currentPage > 0 && currentPage >= savedNotes.length) {
-                        currentPage--; // Geser ke halaman sebelumnya jika yang dihapus adalah halaman terakhir
-                    }
+                    if (currentPage > 0 && currentPage >= savedNotes.length) { currentPage--; }
                     renderPage();
                 }, 250);
             }
@@ -517,6 +564,7 @@
         const createChatLi = (message, className) => {
             const chatLi = document.createElement("li");
             chatLi.classList.add("chat", className);
+            
             if(className === "outgoing") {
                 chatLi.innerHTML = `<p></p>`;
                 chatLi.querySelector("p").textContent = message; 
@@ -563,12 +611,16 @@
             chatInput.value = "";
             chatbox.appendChild(createChatLi(userMessage, "outgoing"));
             chatbox.scrollTo(0, chatbox.scrollHeight);
+            
             generateResponse(userMessage);
         }
 
         sendChatBtn.addEventListener("click", handleChat);
         chatInput.addEventListener("keydown", (e) => {
-            if(e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleChat(); }
+            if(e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleChat();
+            }
         });
 
         chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
@@ -579,27 +631,48 @@
         // ==========================================
         const chatbotWindow = document.getElementById("chatbot-window");
         const chatbotHeader = document.getElementById("chatbot-header");
-        let isDragging = false; let offsetX, offsetY;
+
+        let isDragging = false;
+        let offsetX, offsetY;
 
         chatbotHeader.addEventListener("mousedown", (e) => {
             if (e.target.classList.contains("close-btn")) return;
             if (window.innerWidth <= 600) return;
+
             isDragging = true;
+            
             const rect = chatbotWindow.getBoundingClientRect();
-            chatbotWindow.style.left = rect.left + "px"; chatbotWindow.style.top = rect.top + "px";
-            chatbotWindow.style.right = "auto"; chatbotWindow.style.bottom = "auto"; chatbotWindow.style.margin = "0";
-            offsetX = e.clientX - rect.left; offsetY = e.clientY - rect.top;
+            
+            chatbotWindow.style.left = rect.left + "px";
+            chatbotWindow.style.top = rect.top + "px";
+            chatbotWindow.style.right = "auto";
+            chatbotWindow.style.bottom = "auto";
+            chatbotWindow.style.margin = "0";
+
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
         });
 
         document.addEventListener("mousemove", (e) => {
             if (!isDragging) return;
-            let newX = e.clientX - offsetX; let newY = e.clientY - offsetY;
-            const maxX = window.innerWidth - chatbotWindow.offsetWidth; const maxY = window.innerHeight - chatbotWindow.offsetHeight;
-            newX = Math.max(0, Math.min(newX, maxX)); newY = Math.max(0, Math.min(newY, maxY));
-            chatbotWindow.style.left = `${newX}px`; chatbotWindow.style.top = `${newY}px`;
+
+            let newX = e.clientX - offsetX;
+            let newY = e.clientY - offsetY;
+
+            const maxX = window.innerWidth - chatbotWindow.offsetWidth;
+            const maxY = window.innerHeight - chatbotWindow.offsetHeight;
+
+            newX = Math.max(0, Math.min(newX, maxX));
+            newY = Math.max(0, Math.min(newY, maxY));
+
+            chatbotWindow.style.left = `${newX}px`;
+            chatbotWindow.style.top = `${newY}px`;
         });
 
-        document.addEventListener("mouseup", () => { isDragging = false; });
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+        });
+
     </script>
 </body>
 </html>
