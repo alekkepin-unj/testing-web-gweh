@@ -80,7 +80,7 @@
         .btn-baca:hover { background-color: #3498db; color: #fff; }
 
         /* =========================================
-           8. PAPAN JURNAL (1 LEMBAR BUKU BINDER LIMITER)
+           8. PAPAN JURNAL (BUKU BINDER PRESISI)
         ========================================= */
         .journal-section { background-color: #1a252f; padding: 80px 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         .journal-title { color: #fff; margin-bottom: 30px; text-align: center; font-size: 2.5rem; }
@@ -91,7 +91,7 @@
         .tab-btn { padding: 12px 25px; background: #34495e; border: none; border-radius: 8px 8px 0 0; font-weight: bold; color: #fff; cursor: pointer; transition: 0.3s; font-size: 1rem; flex: 1; }
         .tab-btn.active { background: #fdfbf7; color: #2c3e50; box-shadow: 0 -4px 10px rgba(0,0,0,0.1); }
 
-        /* Container 1 Lembar Buku - OVERFLOW HIDDEN DITAMBAHKAN */
+        /* Container 1 Lembar Buku */
         .book-container {
             width: 100%;
             max-width: 600px;
@@ -102,10 +102,10 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Mengunci garis agar tidak nembus ke bawah */
+            overflow: hidden; 
         }
 
-        /* Besi Spiral di Kiri */
+        /* Besi Spiral & Lubang di Kiri */
         .book-spine {
             position: absolute;
             top: 0; bottom: 0; left: 0;
@@ -131,30 +131,39 @@
             z-index: 1;
         }
 
-        /* Tampilan Mode Menulis / Membaca */
         .book-view {
             flex: 1;
-            padding: 35px 30px 40px 80px; 
+            padding: 32px 30px 40px 80px; 
             display: flex;
             flex-direction: column;
             background-image: repeating-linear-gradient(transparent, transparent 31px, #e8e0d5 31px, #e8e0d5 32px);
             background-size: 100% 32px;
+            background-position: 0 24px; 
             position: relative;
             z-index: 2;
-            overflow: hidden; /* Kunci juga isi halamannya */
+            overflow: hidden; 
         }
 
-        .book-view h3 { font-family: 'Courier New', Courier, monospace; color: #2c3e50; font-size: 1.5rem; margin-bottom: 15px; }
+        .book-view h3 { 
+            font-family: 'Courier New', Courier, monospace; 
+            color: #2c3e50; 
+            font-size: 1.5rem; 
+            line-height: 32px; 
+            margin: 0 0 32px 0; 
+        }
 
-        /* Form Input */
+        /* Area Ketik */
         .book-view textarea {
             flex-grow: 1; width: 100%; border: none; resize: none; background: transparent; outline: none;
-            font-family: 'Courier New', Courier, monospace; font-size: 16px; line-height: 32px; color: #2c3e50;
-            overflow-y: hidden; /* MATIKAN SCROLL BAR AGAR TIDAK BISA NEMBUS KE BAWAH */
+            font-family: 'Courier New', Courier, monospace; font-size: 16px; 
+            line-height: 32px; 
+            color: #2c3e50;
+            overflow-y: hidden; 
+            padding: 0; margin: 0;
         }
         
         .btn-save-note {
-            margin-top: 20px; padding: 12px 20px; background: #2c3e50; color: #fff; border: none; border-radius: 5px;
+            margin-top: 32px; padding: 12px 20px; background: #2c3e50; color: #fff; border: none; border-radius: 5px;
             cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.3s; font-size: 0.95rem; align-self: flex-end;
         }
         .btn-save-note:hover { background: #34495e; transform: translateY(-2px); }
@@ -175,24 +184,55 @@
         /* Area Scroll Riwayat */
         .read-area {
             flex-grow: 1;
-            overflow-y: auto; /* INI YANG BOLEH DI-SCROLL */
+            overflow-y: auto; 
+            overflow-x: hidden; /* MEMATIKAN SCROLL SAMPING AGAR TIDAK LEBAR */
             padding-right: 10px;
             display: flex;
             flex-direction: column;
+            padding-top: 0;
         }
 
         .read-area::-webkit-scrollbar { width: 6px; }
         .read-area::-webkit-scrollbar-thumb { background: #bdc3c7; border-radius: 10px; }
 
-        .history-note { border-bottom: 2px dashed rgba(0,0,0,0.15); padding-bottom: 20px; margin-bottom: 20px; display: flex; flex-direction: column; }
+        /* Desain Item Riwayat Presisi */
+        .history-note {
+            border-bottom: 2px dashed rgba(0,0,0,0.15);
+            padding-bottom: 14px; 
+            margin-bottom: 16px; 
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
         .history-note:last-child { border-bottom: none; margin-bottom: 0; }
 
-        .note-date { font-size: 0.9rem; color: #7f8c8d; margin-bottom: 5px; font-style: italic; font-family: 'Courier New', Courier, monospace;}
-        .note-content { font-family: 'Courier New', Courier, monospace; font-size: 16px; line-height: 32px; color: #2c3e50; white-space: pre-wrap; }
+        .note-date { 
+            font-size: 0.9rem; 
+            color: #7f8c8d; 
+            font-style: italic; 
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 32px; 
+            margin: 0; 
+        }
+        .note-content { 
+            font-family: 'Courier New', Courier, monospace; 
+            font-size: 16px; 
+            line-height: 32px; 
+            color: #2c3e50; 
+            white-space: pre-wrap; 
+            word-wrap: break-word; /* PAKSA TEKS PANJANG TURUN KE BAWAH */
+            word-break: break-word; /* PAKSA TEKS PANJANG TURUN KE BAWAH */
+            margin: 0; 
+            width: 100%;
+        }
         
-        .btn-delete-note { background: none; border: none; color: #e74c3c; cursor: pointer; text-decoration: underline; font-size: 0.85rem; margin-top: 10px; align-self: flex-start; font-weight: bold; font-family: sans-serif; }
+        .btn-delete-note { 
+            background: none; border: none; color: #e74c3c; cursor: pointer; text-decoration: underline; 
+            font-size: 0.85rem; align-self: flex-start; font-weight: bold; font-family: sans-serif; 
+            line-height: 32px; margin: 0; padding: 0;
+        }
 
-        .empty-state { text-align: center; color: #95a5a6; font-style: italic; margin-top: 50px; font-family: 'Courier New', Courier, monospace; font-size: 1rem; }
+        .empty-state { text-align: center; color: #95a5a6; font-style: italic; margin-top: 32px; font-family: 'Courier New', Courier, monospace; font-size: 1rem; line-height: 32px;}
 
         /* =========================================
            9. CHATBOT WIDGET STYLES (DRAGGABLE)
@@ -251,7 +291,7 @@
             .jurnal-lit-grid { grid-template-columns: 1fr; } 
             
             /* Menyesuaikan Buku Spiral di HP */
-            .book-view { padding: 30px 20px 30px 65px; }
+            .book-view { padding: 32px 20px 32px 65px; }
             .book-container::before { left: 50px; }
             .book-spine { width: 40px; }
             
@@ -408,7 +448,7 @@
 
     <script>
         // ==========================================
-        // 1. LOGIKA BUKU JURNAL (LIMITER & AUTO-PAGE TURN)
+        // 1. LOGIKA BUKU JURNAL (LIMITER & TAB)
         // ==========================================
         let savedNotes = [];
 
@@ -436,25 +476,17 @@
         // FUNGSI LIMITER KERTAS & AUTO SAVE
         const entryArea = document.getElementById('entry');
         entryArea.addEventListener('input', function() {
-            // Cek apakah teks mulai menembus batas bawah area kertas (ditambah sedikit toleransi piksel)
             if (this.scrollHeight > this.clientHeight + 2) {
                 let fullText = this.value;
-                // Cari spasi terakhir untuk menghindari memotong kata di tengah-tengah
                 let lastSpace = fullText.lastIndexOf(' ');
                 
-                // Jika user mem-paste teks panjang tanpa spasi
                 if (lastSpace === -1) lastSpace = fullText.length;
                 
                 let textToSave = fullText.substring(0, lastSpace);
                 let textToCarry = fullText.substring(lastSpace + 1);
 
-                // Set value textarea dengan bagian yang muat saja
                 this.value = textToSave;
-                
-                // Simpan secara otomatis (isAutoSave = true)
                 saveNote(true);
-                
-                // Lembaran baru akan dilanjutkan dengan sisa teks yang terpotong
                 this.value = textToCarry;
             }
         });
@@ -488,12 +520,10 @@
 
             renderNotesList();
             
-            // Jika diklik tombol simpan manual, bersihkan kertas & pindah ke tab riwayat
             if (!isAutoSave) {
                 textarea.value = "";
                 switchTab('read'); 
             } else {
-                // Jika halaman penuh & tersimpan otomatis, biarkan user tetap di halaman menulis
                 showToast("Lembar penuh! Tulisan otomatis disimpan. Silakan lanjut di lembaran baru.");
             }
         }
