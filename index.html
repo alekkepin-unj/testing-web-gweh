@@ -64,23 +64,27 @@
         .card h3 { margin-bottom: 10px; color: #2c3e50; }
 
         /* =========================================
-           7. EVENTS SECTION
+           7. LITERATUR & JURNAL SECTION (Baru)
         ========================================= */
-        .events-section { padding: 80px 20px 60px; background-color: #f4f4f4; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .section-title { text-align: center; font-size: 2.5rem; color: #2c3e50; margin-bottom: 40px; }
-        .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; width: 100%; }
-        .event-card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
-        .event-card:hover { transform: translateY(-10px); }
-        .event-image { width: 100%; height: 200px; object-fit: cover; }
-        .event-details { padding: 20px; }
-        .event-date { display: inline-block; background-color: #e8f6ff; color: #3498db; padding: 5px 10px; border-radius: 5px; font-size: 0.85rem; font-weight: bold; margin-bottom: 10px; }
-        .event-details h3 { margin-bottom: 10px; color: #2c3e50; }
-        .event-details p { color: #666; font-size: 0.95rem; margin-bottom: 20px; }
-        .btn-outline { display: inline-block; padding: 8px 20px; border: 2px solid #3498db; color: #3498db; border-radius: 5px; font-weight: bold; transition: 0.3s; }
-        .btn-outline:hover { background-color: #3498db; color: #fff; }
+        .jurnal-lit-section { padding: 80px 20px 60px; background-color: #f4f4f4; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        .section-title { text-align: center; font-size: 2.5rem; color: #2c3e50; margin-bottom: 10px; }
+        .section-subtitle { text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; }
+        
+        .jurnal-lit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; width: 100%; }
+        
+        .jurnal-card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); padding: 25px; transition: transform 0.3s ease; border-left: 5px solid #3498db; display: flex; flex-direction: column; }
+        .jurnal-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        
+        .jurnal-tag { display: inline-block; background-color: #e8f6ff; color: #2980b9; padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; align-self: flex-start; }
+        .jurnal-card h3 { margin-bottom: 10px; color: #2c3e50; font-size: 1.2rem; line-height: 1.4; }
+        .jurnal-author { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 15px; font-style: italic; }
+        .jurnal-desc { color: #555; font-size: 0.95rem; margin-bottom: 25px; flex-grow: 1; }
+        
+        .btn-baca { align-self: flex-start; display: inline-block; padding: 8px 20px; background-color: #fff; border: 2px solid #3498db; color: #3498db; border-radius: 5px; font-weight: bold; transition: 0.3s; text-decoration: none; }
+        .btn-baca:hover { background-color: #3498db; color: #fff; }
 
         /* =========================================
-           8. JURNAL & STICKY NOTE SECTION
+           8. PAPAN KERESAHAN SECTION
         ========================================= */
         .journal-section { background-color: #2c3e50; padding: 80px 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         .journal-title { color: #fff; margin-bottom: 20px; text-align: center; font-size: 2.5rem; }
@@ -130,7 +134,6 @@
         .chatbot .incoming { justify-content: flex-start; margin-right: 20px; }
         .chatbot .incoming p { background: #fff; color: #333; border-radius: 18px 18px 18px 0; border: 1px solid #eaeaea; }
         
-        /* Desain Link Telegram dalam Obrolan Bot */
         .chatbot .chat p a { color: #fff; font-weight: bold; text-decoration: none; background: #2980b9; padding: 8px 12px; border-radius: 8px; display: inline-block; margin-top: 10px; transition: 0.3s; pointer-events: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid #2471a3; }
         .chatbot .chat p a:hover { background: #1a5276; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
 
@@ -153,14 +156,13 @@
 
         @media (max-width: 850px) {
             .nav-links { margin-top: 15px; width: 100%; justify-content: center; }
-            .team-section, .about-section, .events-section, .journal-section { min-height: auto; padding: 60px 20px; }
+            .team-section, .about-section, .jurnal-lit-section, .journal-section { min-height: auto; padding: 60px 20px; }
         }
 
         @media (max-width: 600px) {
             .container { flex-direction: column; text-align: center; }
-            .events-grid { grid-template-columns: 1fr; } 
+            .jurnal-lit-grid { grid-template-columns: 1fr; } 
             
-            /* Chatbot Layar Penuh di HP */
             .chatbot { right: 0 !important; top: 0 !important; left: 0 !important; bottom: 0 !important; width: 100%; height: 100vh; border-radius: 0; transform: translateY(100%); transition: transform 0.3s; z-index: 10000; }
             body.show-chatbot .chatbot { transform: translateY(0) scale(1); }
             .chatbot .chatbox { height: calc(100vh - 140px); } 
@@ -178,8 +180,7 @@
                 <li><a href="#home">Beranda</a></li>
                 <li><a href="#team">Tim Kami</a></li>
                 <li><a href="#about">Tentang</a></li>
-                <li><a href="#events">Kegiatan</a></li>
-                <li><a href="#join">Papan Jurnal</a></li>
+                <li><a href="#jurnal">Literatur</a></li> <li><a href="#join">Papan Jurnal</a></li>
             </ul>
         </div>
     </header>
@@ -207,7 +208,7 @@
                 <h2>Siapa Kami?</h2>
                 <p><strong>Kawan Cerita</strong> lahir dari sebuah keresahan kecil yang berkembang menjadi gerakan besar. Berdiri sejak tahun 2026, kami berdedikasi untuk menciptakan ruang aman bagi siapa saja yang ingin menceritakan segala permasalahan mereka.</p>
                 <p>Visi: Mewujudkan masyarakat yang inklusif dan saling mendukung. Kami percaya bahwa dengan bercerita bisa membuat perasaan jadi lebih baik.</p>
-                <a href="https://t.me/pendengarceritakamu_bot" class="btn">Hubungi Kami</a>
+                <a href="https://t.me/pendengarceritakamu_bot" target="_blank" class="btn">Hubungi Kami</a>
             </div>
             <div class="about-image"><img src="Individual Psychotherapy.jpeg" alt="Foto Kegiatan Komunitas"></div>
         </div>
@@ -222,13 +223,35 @@
         </div>
     </section>
 
-    <section id="events" class="events-section">
+    <section id="jurnal" class="jurnal-lit-section">
         <div class="container" style="display: block; width: 100%;"> 
-            <h2 class="section-title">Kegiatan Mendatang</h2>
-            <div class="events-grid">
-                <div class="event-card"><img src="https://source.unsplash.com/400x300/?seminar,class" class="event-image"><div class="event-details"><span class="event-date">📅 12 Feb 2026</span><h3>Webinar: Mental Health Remaja</h3><p>Diskusi santai bersama psikolog ahli membahas cara mengelola stres akademik.</p><a href="#" class="btn-outline">Daftar Sekarang</a></div></div>
-                <div class="event-card"><img src="https://source.unsplash.com/400x300/?charity,people" class="event-image"><div class="event-details"><span class="event-date">📅 20 Feb 2026</span><h3>Bakti Sosial & Berbagi</h3><p>Kunjungan ke panti asuhan dan penyaluran donasi buku bacaan.</p><a href="#" class="btn-outline">Info Detail</a></div></div>
-                <div class="event-card"><img src="https://source.unsplash.com/400x300/?coffee,meeting" class="event-image"><div class="event-details"><span class="event-date">📅 05 Mar 2026</span><h3>Kopdar Rutin Jakarta</h3><p>Temu kangen anggota komunitas area Jakarta Barat sambil ngopi bareng.</p><a href="#" class="btn-outline">Lihat Lokasi</a></div></div>
+            <h2 class="section-title">Pusat Literatur & Jurnal Pendukung</h2>
+            <p class="section-subtitle">Kumpulan penelitian dan jurnal ilmiah yang mendasari program kerja serta efektivitas pendekatan kami dalam mendampingi remaja.</p>
+            
+            <div class="jurnal-lit-grid">
+                <div class="jurnal-card">
+                    <span class="jurnal-tag">Terapi Katarsis</span>
+                    <h3>Terapi Menulis Ekspresif Sebagai Media Katarsis Dalam Mengurangi Kecemasan</h3>
+                    <p class="jurnal-author">Journal of Islamic Education Guidance and Counseling (2022)</p>
+                    <p class="jurnal-desc">Penelitian ini membuktikan bahwa memberi ruang bagi remaja untuk menuliskan pengalaman pahit dan emosi terpendam sangat efektif menurunkan tingkat kecemasan.</p>
+                    <a href="https://jurnal.idaqu.ac.id/index.php/jiegc/article/download/611/396" target="_blank" class="btn-baca">Baca Jurnal</a>
+                </div>
+                
+                <div class="jurnal-card">
+                    <span class="jurnal-tag">Teknologi Konseling</span>
+                    <h3>Efektivitas Chatbot AI Dibandingkan Layanan Konselor Manusia</h3>
+                    <p class="jurnal-author">Jurnal Inovasi Teknologi dan Edukasi Teknik - Unila (2023)</p>
+                    <p class="jurnal-desc">Membahas bagaimana anonimitas yang diberikan oleh chatbot sangat membantu remaja mengatasi stigma saat harus melaporkan masalah sensitif seperti bullying.</p>
+                    <a href="https://journal.eng.unila.ac.id/index.php/jitet/article/view/8587" target="_blank" class="btn-baca">Baca Jurnal</a>
+                </div>
+                
+                <div class="jurnal-card">
+                    <span class="jurnal-tag">Anti-Bullying</span>
+                    <h3>Peran Teman Sebaya dalam Upaya Pencegahan Perilaku Bullying</h3>
+                    <p class="jurnal-author">Al-Zayn: Jurnal Ilmu Sosial & Hukum (2025)</p>
+                    <p class="jurnal-desc">Menegaskan pentingnya kolaborasi dan program anti-bullying berbasis partisipasi *peer support* untuk menciptakan lingkungan yang aman dan suportif.</p>
+                    <a href="https://ejournal.yayasanpendidikandzurriyatulquran.id/index.php/AlZayn/article/view/1842" target="_blank" class="btn-baca">Baca Jurnal</a>
+                </div>
             </div>
         </div>
     </section>
@@ -249,7 +272,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 Komunitas Kita. Dibuat dengan semangat.</p>
+        <p>&copy; 2026 Kawan Cerita. Dibuat dengan semangat.</p>
     </footer>
 
     <button class="chatbot-toggler">💬</button>
@@ -383,7 +406,6 @@
             handleChat();
         }
 
-        // PENGATURAN BALASAN BOT & LINK TELEGRAM
         const generateResponse = (userMessage) => {
             const msg = userMessage.toLowerCase();
             let response = "Terima kasih sudah berbagi. Kami menghargai setiap cerita yang masuk. Apakah ada hal spesifik yang ingin kamu diskusikan dengan admin?";
