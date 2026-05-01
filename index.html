@@ -14,30 +14,68 @@
         ul { list-style: none; }
 
         /* =========================================
-           2. HEADER & NAVIGASI
+           2. HEADER & NAVIGASI (DYNAMIC COLOR)
         ========================================= */
-        header { background: #2c3e50; color: #fff; padding: 1rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        header { 
+            background: transparent; 
+            color: #fff; 
+            padding: 1.5rem 0; 
+            position: fixed; 
+            top: 0; 
+            width: 100%;
+            z-index: 1000; 
+            transition: all 0.5s ease; 
+        }
+        
         .container { max-width: 1100px; margin: auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        .logo { font-size: 1.5rem; font-weight: bold; color: #ecf0f1; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #ecf0f1; transition: color 0.5s ease; }
         .nav-links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
-        .nav-links a:hover { color: #3498db; }
+        .nav-links a { color: #fff; transition: color 0.5s ease; font-weight: 500;}
+        .nav-links a:hover { color: #f1c40f; }
+
+        /* --- KELAS WARNA HEADER DINAMIS --- */
+        header.theme-hero { background: rgba(0,0,0, 0.3); padding: 1rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1);}
+        header.theme-orange { background: #fff; padding: 1rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        header.theme-orange .logo, header.theme-orange .nav-links a { color: #000080; }
+        header.theme-light { background: #ffffff; padding: 1rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        header.theme-light .logo { color: #2c3e50; }
+        header.theme-light .nav-links a { color: #333; }
+        header.theme-light .nav-links a:hover { color: #3498db; }
+        header.theme-dark { background: #203C7A; padding: 1rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.5); border-bottom: 1px solid rgba(255,255,255,0.1);}
+        header.theme-dark .logo, header.theme-dark .nav-links a { color: #f1c40f; }
 
         /* =========================================
-           3. HERO SECTION
+           3. HERO SECTION (DENGAN TEXTURE TEKS)
         ========================================= */
-        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('bg 2.jpeg'); background-size: cover; background-position: center; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #fff; padding: 0 20px; }
-        .hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 10px; }
-        .hero p { font-size: 1.1rem; margin-bottom: 20px; max-width: 600px; }
-        .btn { display: inline-block; background: #3498db; color: #fff; padding: 10px 30px; border-radius: 5px; transition: 0.3s; }
-        .btn:hover { background: #2980b9; }
+        .hero { 
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('star.jpeg'); 
+            background-size: cover; background-position: center; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #fff; padding: 0 20px; 
+        }
+        
+        .hero h1.textured-title { 
+            font-size: clamp(3.5rem, 8vw, 6rem); 
+            font-family: 'Georgia', serif; 
+            margin-bottom: 5px; 
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png'), linear-gradient(45deg, #fdfbf7, #e5b982, #f1c40f);
+            background-size: auto, cover;
+            color: transparent; 
+            -webkit-background-clip: text; 
+            background-clip: text; 
+            filter: drop-shadow(3px 5px 6px rgba(0,0,0,0.6));
+        }
+
+        .hero h2.subtitle { font-size: clamp(1.5rem, 3vw, 2.5rem); margin-bottom: 15px; text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
+        .hero p { font-size: 1.1rem; margin-bottom: 20px; max-width: 600px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
+        .btn { display: inline-block; background: #3498db; color: #fff; padding: 10px 30px; border-radius: 5px; transition: 0.3s; text-shadow: none; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .btn:hover { background: #2980b9; transform: translateY(-2px); }
 
         /* =========================================
            4. TEAM SECTION
         ========================================= */
-        .team-section { padding: 80px 20px 60px; background-color: #fff; text-align: center; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .team-title { font-size: 2.5rem; margin-bottom: 40px; color: #2c3e50; }
+        .team-section { padding: 100px 20px 60px; background-color: #89cff0; text-align: center; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; } 
+        .team-title { font-size: 2.5rem; margin-bottom: 40px; color: #333; }
         .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; max-width: 1100px; margin: 0 auto; width: 100%; }
-        .team-member { background: #f9f9f9; padding: 20px 10px; border-radius: 10px; text-align: center; transition: transform 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .team-member { background: #fff; padding: 20px 10px; border-radius: 10px; text-align: center; transition: transform 0.3s; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .team-member:hover { transform: translateY(-5px); }
         .team-member img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 3px solid #3498db; }
         .team-member h4 { color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
@@ -46,7 +84,7 @@
         /* =========================================
            5. ABOUT SECTION
         ========================================= */
-        .about-section { padding: 60px 20px; background-color: #f9f9f9; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .about-section { padding: 100px 20px; background-color: #f9f9f9; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
         .about-content { display: flex; align-items: center; gap: 40px; max-width: 1100px; margin: auto; flex-wrap: wrap; }
         .about-text { flex: 1; min-width: 300px; }
         .about-text h2 { font-size: 2.5rem; color: #2c3e50; margin-bottom: 20px; }
@@ -57,7 +95,7 @@
         /* =========================================
            6. FEATURES SECTION
         ========================================= */
-        .features { padding: 60px 20px; background: #fff; }
+        .features { padding: 100px 20px; background: #fff; }
         .features-title { text-align: center; font-size: 2.5rem; margin-bottom: 40px; color:#2c3e50; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1100px; margin: auto; }
         .card { background: #f9f9f9; padding: 30px 20px; text-align: center; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
@@ -66,7 +104,7 @@
         /* =========================================
            7. LITERATUR SECTION
         ========================================= */
-        .jurnal-lit-section { padding: 80px 20px 60px; background-color: #f4f4f4; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        .jurnal-lit-section { padding: 100px 20px 60px; background-color: #f4f4f4; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
         .section-title { text-align: center; font-size: 2.5rem; color: #2c3e50; margin-bottom: 10px; }
         .section-subtitle { text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; }
         .jurnal-lit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; width: 100%; }
@@ -80,13 +118,34 @@
         .btn-baca:hover { background-color: #3498db; color: #fff; }
 
         /* =========================================
-           8. PAPAN JURNAL (BUKU BINDER PRESISI)
+           8. PAPAN JURNAL (FANTASY BOOK STYLE)
         ========================================= */
-        .journal-section { background-color: #1a252f; padding: 80px 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .journal-title { color: #fff; margin-bottom: 30px; text-align: center; font-size: 2.5rem; }
-        .journal-title span { color: #f1c40f; }
+        .journal-section { 
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('star 2.jpeg'); 
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed; 
+            padding: 100px 20px 80px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+        }
+        
+        .journal-title { 
+            color: #ffffff; /* Ubah jadi putih terang */
+            margin-bottom: 30px; 
+            text-align: center; 
+            font-size: 2.5rem; 
+            /* Tambahkan efek bayangan hitam tebal dan glow putih tipis */
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        .journal-title span { 
+            color: #f1c40f; /* Warna kuning emas */
+            /* Tambahkan glow kuning biar nyala di background gelap */
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9), 0 0 15px rgba(241, 196, 15, 0.5); 
+        }
 
-        /* Tab Navigasi Buku */
         .journal-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; width: 100%; max-width: 600px; }
         .tab-btn { padding: 12px 25px; background: #34495e; border: none; border-radius: 8px 8px 0 0; font-weight: bold; color: #fff; cursor: pointer; transition: 0.3s; font-size: 1rem; flex: 1; }
         .tab-btn.active { background: #fdfbf7; color: #2c3e50; box-shadow: 0 -4px 10px rgba(0,0,0,0.1); }
@@ -235,7 +294,34 @@
         .empty-state { text-align: center; color: #95a5a6; font-style: italic; margin-top: 32px; font-family: 'Courier New', Courier, monospace; font-size: 1rem; line-height: 32px;}
 
         /* =========================================
-           9. CHATBOT WIDGET STYLES (DRAGGABLE)
+           9. MUSIC PLAYER (BGM CONTROLS)
+        ========================================= */
+        .bgm-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px; /* Posisi di kiri bawah */
+            outline: none; border: none; 
+            height: 50px; width: 50px; 
+            background: #2c3e50; color: #fff; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 1.5rem; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
+            transition: all 0.3s ease; 
+            z-index: 9998;
+        }
+        .bgm-btn:hover { background: #f1c40f; color: #2c3e50; transform: scale(1.1); }
+        .bgm-btn.playing { animation: pulse 2s infinite; } /* Efek denyut saat lagu nyala */
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(241, 196, 15, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(241, 196, 15, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(241, 196, 15, 0); }
+        }
+
+        /* =========================================
+           10. CHATBOT WIDGET STYLES
         ========================================= */
         .chatbot-toggler { position: fixed; bottom: 30px; right: 35px; outline: none; border: none; height: 60px; width: 60px; background: #3498db; color: #fff; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: all 0.2s ease; z-index: 9999; }
         .chatbot-toggler:hover { transform: scale(1.1); background: #2980b9; }
@@ -277,36 +363,35 @@
         .chatbox::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
 
         /* =========================================
-           10. FOOTER & MEDIA QUERIES 
+           11. FOOTER & MEDIA QUERIES 
         ========================================= */
         footer { background: #1a252f; color: #fff; text-align: center; padding: 20px; }
 
         @media (max-width: 850px) {
             .nav-links { margin-top: 15px; width: 100%; justify-content: center; }
-            .team-section, .about-section, .jurnal-lit-section, .journal-section { min-height: auto; padding: 60px 20px; }
+            .team-section, .about-section, .jurnal-lit-section, .journal-section { min-height: auto; padding: 100px 20px 60px; }
         }
 
         @media (max-width: 600px) {
             .container { flex-direction: column; text-align: center; }
             .jurnal-lit-grid { grid-template-columns: 1fr; } 
             
-            /* Menyesuaikan Buku Spiral di HP */
-            .book-view { padding: 32px 20px 32px 65px; }
-            .book-container::before { left: 50px; }
-            .book-spine { width: 40px; }
+            .book-view { margin: 20px 15px 20px 35px; padding: 20px; }
+            .book-spine { width: 30px; }
             
-            /* Chatbot Layar Penuh di HP */
             .chatbot { right: 0 !important; top: 0 !important; left: 0 !important; bottom: 0 !important; width: 100%; height: 100vh; border-radius: 0; transform: translateY(100%); transition: transform 0.3s; z-index: 10000; }
             body.show-chatbot .chatbot { transform: translateY(0) scale(1); }
             .chatbot .chatbox { height: calc(100vh - 140px); } 
             .chatbot-toggler { bottom: 20px; right: 20px; }
             .chatbot header { cursor: default; } 
+
+            .bgm-btn { bottom: 20px; left: 20px; } /* Sesuaikan posisi tombol lagu di HP */
         }
     </style>
 </head>
 <body>
 
-    <header>
+    <header id="main-header">
         <div class="container">
             <div class="logo">Kawan Cerita</div>
             <ul class="nav-links">
@@ -319,24 +404,25 @@
         </div>
     </header>
 
-    <section id="home" class="hero">
-        <h1>Kami Ada Untuk Mendengarkan</h1>
+    <section id="home" class="hero section-scroll">
+        <h1 class="textured-title">Kawan Cerita</h1>
+        <h2 class="subtitle">Kami Ada Untuk Mendengarkan</h2>
         <p>Di sini tempat kamu aman untuk menceritakan semuanya, jangan takut untuk berbagi beban yang kamu pikul saat ini dengan kami. Kami siap mendengarkan ceritamu</p>
         <a href="#join" class="btn">Tulis Jurnalmu</a>
     </section>
 
-    <section id="team" class="team-section">
+    <section id="team" class="team-section section-scroll">
         <h2 class="team-title">Tim Penggerak</h2>
         <div class="team-grid">
-            <div class="team-member"><img src="smol gura.jpg" alt="Foto Ketua"><h4>Calvin Madclin</h4><p>NIM 1801624047</p></div>
-            <div class="team-member"><img src="kovalski.jpg" alt="Foto Sekretaris"><h4>Mahara Damar</h4><p>NIM 1801624271</p></div>
-            <div class="team-member"><img src="mumei.jpeg" alt="Foto Humas"><h4>Afrin Khalisa</h4><p>NIM 1801624002</p></div>
-            <div class="team-member"><img src="smol ame.jpg" alt="Foto Bendahara"><h4>Raisha Amalia</h4><p>NIM 1801624013</p></div>
-            <div class="team-member"><img src="yae.jpg" alt="Foto Kreatif"><h4>Syafira Putri</h4><p>NIM 1801624039</p></div>
+            <div class="team-member"><img src="Calvin.jpeg" alt="Foto Ketua"><h4>Calvin Madclin</h4><p>NIM 1801624047</p></div>
+            <div class="team-member"><img src="Damar.jpeg" alt="Foto Sekretaris"><h4>Mahara Damar</h4><p>NIM 1801624271</p></div>
+            <div class="team-member"><img src="Afrin.jpeg" alt="Foto Humas"><h4>Afrin Khalisa</h4><p>NIM 1801624002</p></div>
+            <div class="team-member"><img src="Raisha.jpeg" alt="Foto Bendahara"><h4>Raisha Amalia</h4><p>NIM 1801624013</p></div>
+            <div class="team-member"><img src="Syasya.jpeg" alt="Foto Kreatif"><h4>Syafira Putri</h4><p>NIM 1801624039</p></div>
         </div>
     </section>
 
-    <section id="about" class="about-section">
+    <section id="about" class="about-section section-scroll">
         <div class="about-content">
             <div class="about-text">
                 <h2>Siapa Kami?</h2>
@@ -348,7 +434,7 @@
         </div>
     </section>
 
-    <section id="features" class="features">
+    <section id="features" class="features section-scroll">
         <h2 class="features-title">Apa yang Kami Lakukan?</h2>
         <div class="features-grid">
             <div class="card"><h3>📝 Peer Counseling</h3><p>Wadah untuk bertukar pikiran dan berbagi perspektif tentang masalah yang dihadapi.</p></div>
@@ -357,7 +443,7 @@
         </div>
     </section>
 
-    <section id="jurnal-lit" class="jurnal-lit-section">
+    <section id="jurnal-lit" class="jurnal-lit-section section-scroll">
         <div class="container" style="display: block; width: 100%;"> 
             <h2 class="section-title">Pusat Literatur & Jurnal Pendukung</h2>
             <p class="section-subtitle">Kumpulan penelitian dan jurnal ilmiah yang mendasari program kerja serta efektivitas pendekatan kami dalam mendampingi remaja.</p>
@@ -388,7 +474,7 @@
         </div>
     </section>
 
-    <section id="join" class="journal-section">
+    <section id="join" class="journal-section section-scroll">
         <h2 class="journal-title">Buku <span>Jurnal Keresahan</span></h2>
         
         <div class="journal-tabs">
@@ -400,15 +486,15 @@
             <div class="book-spine"></div>
             
             <div class="book-view" id="write-view">
-                <div id="toast" class="toast"></div> <h3>Lembar Baru...</h3>
-                <textarea id="entry" placeholder="Ketikan beban pikiran, ide, atau keresahanmu di sini..."></textarea>
-                <button class="btn-save-note" onclick="saveNote()">Simpan ke Lembar Jurnal</button>
+                <div id="toast" class="toast"></div> 
+                <h3>Lembaran Kosong</h3>
+                <textarea id="entry" placeholder="Tuliskan apapun yang membebani pikiranmu di sini..."></textarea>
+                <button class="btn-save-note" onclick="saveNote()">Simpan Cerita Ini</button>
             </div>
 
             <div class="book-view" id="read-view" style="display: none;">
-                <h3>Riwayat Jurnal</h3>
-                <div class="read-area" id="read-area">
-                    </div>
+                <h3>Arsip Cerita</h3>
+                <div class="read-area" id="read-area"></div>
             </div>
         </div>
     </section>
@@ -416,6 +502,13 @@
     <footer>
         <p>&copy; 2026 Kawan Cerita. Dibuat dengan semangat.</p>
     </footer>
+
+    <!-- WIDGET MUSIK LATAR (BGM) -->
+    <!-- PERHATIAN: Ubah 'bgm.mp3' dengan nama file lagu di folder lokalmu -->
+    <audio id="bgm-audio" loop>
+        <source src="Fond Memories Instrumental.mp3" type="audio/mpeg">
+    </audio>
+    <button class="bgm-btn" id="bgm-btn" onclick="toggleBGM()">🔇</button>
 
     <button class="chatbot-toggler">💬</button>
     <div class="chatbot" id="chatbot-window">
@@ -448,7 +541,59 @@
 
     <script>
         // ==========================================
-        // 1. LOGIKA BUKU JURNAL (LIMITER & TAB)
+        // 0. LOGIKA MUSIK LATAR (BGM CONTROLS)
+        // ==========================================
+        const bgmAudio = document.getElementById('bgm-audio');
+        const bgmBtn = document.getElementById('bgm-btn');
+        let isPlaying = false;
+
+        function toggleBGM() {
+            if (isPlaying) {
+                bgmAudio.pause();
+                bgmBtn.innerText = '🔇';
+                bgmBtn.classList.remove('playing');
+                isPlaying = false;
+            } else {
+                // Menurunkan volume sedikit agar tidak mengganggu (Opsional)
+                bgmAudio.volume = 0.5; 
+                bgmAudio.play();
+                bgmBtn.innerText = '🎵';
+                bgmBtn.classList.add('playing');
+                isPlaying = true;
+            }
+        }
+
+        // ==========================================
+        // 1. LOGIKA HEADER DINAMIS (SCROLL SPY)
+        // ==========================================
+        const header = document.getElementById('main-header');
+        const sections = document.querySelectorAll('.section-scroll');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            header.className = '';
+
+            if (current === 'home') {
+                header.classList.add('theme-hero'); 
+            } else if (current === 'team') {
+                header.classList.add('theme-orange'); 
+            } else if (current === 'about' || current === 'features' || current === 'jurnal-lit') {
+                header.classList.add('theme-light'); 
+            } else if (current === 'join') {
+                header.classList.add('theme-dark'); 
+            }
+        });
+
+        // ==========================================
+        // 2. LOGIKA BUKU JURNAL
         // ==========================================
         let savedNotes = [];
 
@@ -473,15 +618,12 @@
             }
         }
 
-        // FUNGSI LIMITER KERTAS & AUTO SAVE
         const entryArea = document.getElementById('entry');
         entryArea.addEventListener('input', function() {
             if (this.scrollHeight > this.clientHeight + 2) {
                 let fullText = this.value;
                 let lastSpace = fullText.lastIndexOf(' ');
-                
                 if (lastSpace === -1) lastSpace = fullText.length;
-                
                 let textToSave = fullText.substring(0, lastSpace);
                 let textToCarry = fullText.substring(lastSpace + 1);
 
@@ -524,7 +666,7 @@
                 textarea.value = "";
                 switchTab('read'); 
             } else {
-                showToast("Lembar penuh! Tulisan otomatis disimpan. Silakan lanjut di lembaran baru.");
+                showToast("Kertas penuh! Tulisan otomatis disegel. Silakan lanjut di lembaran baru.");
             }
         }
 
@@ -533,7 +675,7 @@
             readArea.innerHTML = ''; 
 
             if (savedNotes.length === 0) { 
-                readArea.innerHTML = "<p class='empty-state'>Belum ada riwayat jurnal tersimpan. Silakan tulis keresahanmu terlebih dahulu...</p>";
+                readArea.innerHTML = "<p class='empty-state'>Arsip masih kosong. Silakan tulis keresahanmu terlebih dahulu...</p>";
                 return; 
             }
 
@@ -553,7 +695,7 @@
 
                 const delBtn = document.createElement('button');
                 delBtn.className = 'btn-delete-note';
-                delBtn.innerText = '🗑️ Hapus Jurnal Ini';
+                delBtn.innerText = '🗑️ Hapus Arsip Ini';
                 delBtn.onclick = () => deleteNote(note.id);
 
                 noteDiv.appendChild(dateDiv);
@@ -565,7 +707,7 @@
         }
 
         function deleteNote(id) {
-            if(confirm("Yakin ingin menghapus jurnal ini selamanya?")) {
+            if(confirm("Yakin ingin menghapus arsip jurnal ini selamanya?")) {
                 savedNotes = savedNotes.filter(n => n.id !== id);
                 localStorage.setItem('kawan_cerita_notes', JSON.stringify(savedNotes));
                 renderNotesList();
@@ -573,7 +715,7 @@
         }
 
         // ==========================================
-        // 2. LOGIKA CHATBOT INTERAKTIF
+        // 3. LOGIKA CHATBOT INTERAKTIF
         // ==========================================
         const chatbotToggler = document.querySelector(".chatbot-toggler");
         const closeBtn = document.querySelector(".close-btn");
@@ -647,7 +789,7 @@
         closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
 
         // ==========================================
-        // 3. LOGIKA DRAG & DROP UNTUK CHATBOT
+        // 4. LOGIKA DRAG & DROP UNTUK CHATBOT
         // ==========================================
         const chatbotWindow = document.getElementById("chatbot-window");
         const chatbotHeader = document.getElementById("chatbot-header");
